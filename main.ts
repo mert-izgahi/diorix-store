@@ -1,6 +1,10 @@
 import express from "express";
 import cookieParser from "cookie-parser";
 import { PORT } from "./config";
+import { logger } from "./lib/pino";
+
+// Middelwares
+import { loggerMiddleware } from "./middlewares/logger.middleware";
 
 const app = express();
 
@@ -9,6 +13,8 @@ app.use(express.json({ limit: "10mb" }));
 app.use(express.urlencoded({ limit: "10mb" }));
 app.use(cookieParser());
 
+// Middlewares
+app.use(loggerMiddleware);
 
 // Routes
 app.get("/", (req, res) => {
@@ -20,5 +26,5 @@ app.get("/", (req, res) => {
 
 // Server entry point
 app.listen(PORT, () => {
-    console.log(`Server started on port ${PORT}`);
+    logger.info(`Server started on port ${PORT}`);
 })
