@@ -5,6 +5,9 @@ import { logger } from "./lib/pino";
 
 // Middelwares
 import { loggerMiddleware } from "./middlewares/logger.middleware";
+import { errorHandlerMiddleware } from "./middlewares/error-handler.middleware";
+import { notFoundMiddleware } from "./middlewares/notfound.middleware";
+import { BadRequestError } from "./utils/app-errors";
 
 const app = express();
 
@@ -17,11 +20,21 @@ app.use(cookieParser());
 app.use(loggerMiddleware);
 
 // Routes
-app.get("/", (req, res) => {
+app.get("/api/health", (req, res) => {
+    throw new BadRequestError();
     res.status(200).json({
-        message: "Hello from server!"
+        status: "Ok",
+        message: "Server is running",
+        result: {
+            timestamp: Date.now()
+        }
     });
-})
+});
+
+// Error Handlers
+app.use(notFoundMiddleware);
+app.use(errorHandlerMiddleware);
+
 
 
 // Server entry point
