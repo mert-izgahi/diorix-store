@@ -7,3 +7,5 @@ dotenv.config({ path: path.join(__dirname, ".env") });
 export const PORT = process.env.PORT || 5001;
 export const LOG_LEVEL = process.env.LOG_LEVEL || "info";
 export const HOSTNAME = process.env.HOSTNAME || "localhost";
+
+export const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost:27017/ecommerce";
