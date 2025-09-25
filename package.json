@@ -3,7 +3,8 @@
   "module": "main.ts",
   "type": "module",
   "scripts": {
-    "dev": "bun run --watch main.ts"
+    "dev": "bun run --watch main.ts",
+    "seed": "bun run seed.ts"
   },
   "devDependencies": {
     "@types/bun": "latest"
@@ -12,6 +13,7 @@
     "typescript": "^5.0.0"
   },
   "dependencies": {
+    "@faker-js/faker": "^10.0.0",
     "@types/bcryptjs": "^3.0.0",
     "@types/cookie-parser": "^1.4.9",
     "@types/cors": "^2.8.19",

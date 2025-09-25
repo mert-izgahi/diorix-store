@@ -2,6 +2,7 @@ import express from "express";
 import cookieParser from "cookie-parser";
 import { MONGODB_URI, PORT } from "./config";
 import { logger } from "./lib/pino";
+import router from "./routes";
 
 // Middelwares
 import { loggerMiddleware } from "./middlewares/logger.middleware";
@@ -21,16 +22,18 @@ app.use(cookieParser());
 app.use(loggerMiddleware);
 
 // Routes
-app.get("/api/health", (req, res) => {
-    throw new BadRequestError();
-    res.status(200).json({
-        status: "Ok",
-        message: "Server is running",
-        result: {
-            timestamp: Date.now()
-        }
-    });
-});
+// app.get("/api/health", (req, res) => {
+//     throw new BadRequestError();
+//     res.status(200).json({
+//         status: "Ok",
+//         message: "Server is running",
+//         result: {
+//             timestamp: Date.now()
+//         }
+//     });
+// });
+
+app.use(router);
 
 // Error Handlers
 app.use(notFoundMiddleware);
